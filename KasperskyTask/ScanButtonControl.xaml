@@ -1,0 +1,58 @@
+﻿<Button x:Class="KasperskyTask.ScanButtonControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KasperskyTask"
+             mc:Ignorable="d"
+             Name="scanButton"
+             d:DesignHeight="{Binding Path=Height, RelativeSource={RelativeSource TemplatedParent}}" d:DesignWidth="{Binding Path=Width, RelativeSource={RelativeSource TemplatedParent}}">
+    <Button.Style>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+
+                        <Canvas Background="Transparent">
+                            <Grid Canvas.Bottom="{Binding VerticalShift, ElementName=scanButton}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0" Margin="0 0 0 8">
+                                    <Grid Name="PictureGrid" Visibility="{Binding PictureVisiblity, ElementName=scanButton}">
+                                        <Ellipse Stroke="#FF009976" StrokeThickness="{Binding ElStrokeThickness, ElementName=scanButton}" Fill="White" Height="{Binding Width, RelativeSource={RelativeSource Self}}" Width="{Binding Path=Width, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                        <Image Width="{Binding ImgSize, ElementName=scanButton}" Height="{Binding Width, RelativeSource={RelativeSource Self}}" Source="{Binding ImgPath, ElementName=scanButton}"/>
+                                    </Grid>
+                                    
+                                    <Grid Name="ProgresGrid" Visibility="{Binding ProgressVisiblity, ElementName=scanButton}">
+                                        <Ellipse Stroke="Transparent" StrokeThickness="1" Fill="White" Height="{Binding Width, RelativeSource={RelativeSource Self}}" Width="{Binding ElementName=RoundProgressBar, Path=Width}"/>
+                                        <ProgressBar Name="RoundProgressBar" Value="{Binding ProgressBarValue, ElementName=scanButton}" Maximum="100" Height="{Binding Width, RelativeSource={RelativeSource Self}}" Width="{Binding Path=Width, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Style="{DynamicResource RoundProgressBarStyle}"
+                                            Foreground="#FF3498C6">
+                                            <ProgressBar.Background>
+                                                <ImageBrush ImageSource="{Binding ProgressBarBGimg, ElementName=scanButton}" Stretch="None"/>
+                                            </ProgressBar.Background>
+                                        </ProgressBar>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <TextBlock Margin="5 0 0 0" FontSize="45" VerticalAlignment="Bottom">
+                                                <ContentPresenter Content="{Binding ElementName=RoundProgressBar, Path=Value}" HorizontalAlignment="Stretch"></ContentPresenter>
+                                            </TextBlock>
+                                            <TextBlock Margin="0 0 0 8" FontSize="20" VerticalAlignment="Bottom"><Run Text="%"/></TextBlock>
+                                        </StackPanel>
+                                    </Grid>
+                                </Grid>
+                                <Label Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="#FF6F797E" FontSize="16">
+                                    <ContentControl Content="{Binding LabelContent, ElementName=scanButton}" HorizontalAlignment="Stretch"></ContentControl>
+                                </Label>
+                                
+                            </Grid> 
+                        </Canvas>
+                        
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Button.Style>
+</Button>
